@@ -3,6 +3,7 @@ const fs = require('node:fs')
 const path = require('node:path')
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js')
 const { token } = require('./config.json')
+const server = require('./data/data_base.js')
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] })
 
@@ -35,6 +36,15 @@ client.on(Events.MessageCreate, async message => {
 	}
 })
 
+client.on(Events.MessageDelete, (interaction) => {
+	console.log(`A interação ${interaction.id} foi deletada.`);
+	const lobby = server.lobbyes.find(lobby => lobby.id == interaction.channelId+interaction.guildId)
+	if(lobby){
+		lobby.myInteraction = '';
+		console.log(`A interação da partida foi deletada`);
+	}
+});
+  
 client.on(Events.InteractionCreate, async interaction => {      
     if (!interaction.isChatInputCommand()) return
 

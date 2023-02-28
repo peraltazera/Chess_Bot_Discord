@@ -13,7 +13,6 @@ let startPiecesBlack = [{name: 'Rook', img: './images/B_Rook.png'},{name: 'Knigh
 
 async function CreateBoard(from, fromX, fromY, to, toX, toY, lobby)
 {
-    console.log(lobby)
     let difX = 113
     let difY = 78
     
@@ -51,8 +50,9 @@ async function CreateBoard(from, fromX, fromY, to, toX, toY, lobby)
         lobby.player1.turn = !lobby.player1.turn
         lobby.player2.turn = !lobby.player2.turn
 
-        lobby.board[toX][toY] = new server.Piece(lobby.board[fromX][fromY].name, lobby.board[fromX][fromY].img, lobby.board[toX][toY].x, lobby.board[toX][toY].y)
-        lobby.board[fromX][fromY] = new server.Piece('', '', lobby.board[fromX][fromY].x, lobby.board[fromX][fromY].y)
+        lobby.board[toX][toY] = new server.Piece(lobby.board[fromX][fromY].name, lobby.board[fromX][fromY].img, lobby.board[toX][toY].x, lobby.board[toX][toY].y, 
+                                                    lobby.board[fromX][fromY].white, lobby.board[fromX][fromY].start)
+        lobby.board[fromX][fromY] = new server.Piece('', '', lobby.board[fromX][fromY].x, lobby.board[fromX][fromY].y, false, false)
 
         for(let x = 0; x < 8;x++){
             for(let y = 0; y < 8;y++){
@@ -107,7 +107,7 @@ async function CreateBoard(from, fromX, fromY, to, toX, toY, lobby)
             lobby.board[i][7].img = startPiecesWhite[i].img
             lobby.board[i][7].x = i
             lobby.board[i][7].y = 7
-            lobby.board[i][6].white = true
+            lobby.board[i][7].white = true
             await Canvas.loadImage(startPiecesWhite[i].img).then((image) => {
                 ctx.drawImage(image, posPieceX(i), posPieceY(7), pieceWidth, pieceHeight)
             })	

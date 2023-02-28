@@ -17,14 +17,15 @@ module.exports = {
                 { id: lobby.player1.id, username: lobby.player1.username, turn: true  }, 
                 { id: lobby.player2.id, username: lobby.player2.username, turn: false  }, 
                 lobby.myInteraction, 
-                game))
+                lobby.difficulty,
+                lobby.game,
+                ''))
             server.lobbyes.splice(server.lobbyes.indexOf(lobby), 1)
             lobby = server.lobbyes.find(lobby => lobby.id == interaction.channelId+interaction.guildId)
             const attachment = await Board.CreateBoard(null, null, null, null, null, null, lobby)
             await interaction.reply({ files: [attachment] })
             await lobby.myInteraction.deleteReply()
             lobby.myInteraction = interaction
-            console.log(server.lobbyes)
         }
         else
         {
