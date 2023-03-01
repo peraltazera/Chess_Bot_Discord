@@ -4,7 +4,7 @@ const path = require('node:path')
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js')
 const { token } = require('./config.json')
 const server = require('./data/data_base.js')
-
+  
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] })
 
 client.commands = new Collection()

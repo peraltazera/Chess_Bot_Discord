@@ -3,6 +3,8 @@ const server = require('../data/data_base.js')
 const jsChessEngine = require('js-chess-engine')
 const Board = require('../game/board.js')
 const FeedBack = require('../game/feedback.js')
+const { databaseBot } = require('../services/firebaseConfig.js')
+const Teste = require('../index.js')
 
 module.exports = {
 	data: new SlashCommandBuilder()
