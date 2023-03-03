@@ -57,7 +57,6 @@ module.exports = {
                                 if(!lobby.board[toX][toY].name || lobby.board[toX][toY].name && lobby.board[toX][toY].white && lobby.player2.turn ||
                                     lobby.board[toX][toY].name && !lobby.board[toX][toY].white && lobby.player1.turn )
                                 {
-                                    console.log(lobby.board[fromX][fromY])
                                     if(Piece.CheckMovement(lobby.board[fromX][fromY], toX, toY, lobby))
                                     {
                                         let attachment = await Board.CreateBoard(from, fromX, fromY, to, toX, toY, lobby)
@@ -67,11 +66,8 @@ module.exports = {
                                             lobby.myInteraction.deleteReply()
                                         }
                                         if(lobby.game){
-                                            console.log(lobby.game.exportJson())
                                             lobby.game.move(from, to)
-                                            lobby.game.printToConsole()
                                             lobby.game.aiMove(lobby.difficulty) 
-                                            lobby.game.printToConsole()
                                             const fromAi = lobby.game.getHistory()[lobby.game.getHistory().length - 1].from
                                             const toAi = lobby.game.getHistory()[lobby.game.getHistory().length - 1].to
                                             fromX = values.find(obj => fromAi[0] == obj.name).value
@@ -84,7 +80,6 @@ module.exports = {
                                                 attachment = await Board.CreateBoard(from, fromX, fromY, to, toX, toY, lobby)
                                                 lobby.attachment = attachment
                                                 await interaction.editReply({ files: [lobby.attachment] })
-                                                console.log(lobby.game.exportJson())
                                             }
                                         }
                                         lobby.myInteraction = interaction

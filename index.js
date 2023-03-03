@@ -29,7 +29,6 @@ client.once(Events.ClientReady, c => {
 client.login(token)
 
 client.on(Events.MessageCreate, async message => {
-	console.log(message.content)
 	if (message.content === '!hello') {
 		message.reply('Olá!')
 		message.reply({ content: `Tudo bem?`, ephemeral: true })
@@ -37,12 +36,12 @@ client.on(Events.MessageCreate, async message => {
 })
 
 client.on(Events.MessageDelete, (interaction) => {
-	console.log(`A interação ${interaction.id} foi deletada.`);
+	//console.log(`A interação ${interaction.id} foi deletada.`);
 	const lobby = server.lobbyes.find(lobby => lobby.id == interaction.channelId+interaction.guildId)
-	if(lobby){
-		lobby.myInteraction = '';
-		console.log(`A interação da partida foi deletada`);
-	}
+	//if(lobby){
+		//lobby.myInteraction = '';
+		//console.log(`A interação da partida foi deletada`);
+	//}
 });
   
 client.on(Events.InteractionCreate, async interaction => {      

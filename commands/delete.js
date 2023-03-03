@@ -14,7 +14,6 @@ module.exports = {
             }
             server.lobbyes.splice(server.lobbyes.indexOf(lobby), 1)
             FeedBack.CreateFeedback(interaction, `Jogo Finalizado!`, false, 5)
-            console.log(server.lobbyes)
         }
         else
         {

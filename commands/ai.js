@@ -34,7 +34,6 @@ module.exports = {
         else if(!user.bot)
         {
             const game = new jsChessEngine.Game()
-            game.printToConsole()
             server.lobbyes.push(new server.lobby(interaction.channelId+interaction.guildId,
                 interaction.channelId, interaction.guildId, 
                 { id: user.id, username: user.username, turn: true }, 

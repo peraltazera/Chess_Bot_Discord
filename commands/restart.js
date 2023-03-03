@@ -29,7 +29,7 @@ module.exports = {
         }
         else
         {
-            await interaction.reply(`Erro!`)
+            await interaction.reply(`Partida não encontrada!`)
         }
 	},
 }
