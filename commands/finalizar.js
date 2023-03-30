@@ -4,8 +4,8 @@ const FeedBack = require('../game/feedback.js')
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('delete')
-		.setDescription('Finaliza a partida!'),
+		.setName('finalizar')
+		.setDescription('Termine a partida'),
 	async execute(interaction) {
         const lobby = server.lobbyes.find(lobby => lobby.id == interaction.channelId+interaction.guildId)
         if(lobby){

@@ -1,9 +1,6 @@
 const server = require('../data/data_base.js')
 
 function CheckMovement(piece, toX, toY, lobby){
-    // console.log(`To X: ${toX}`)
-    // console.log(`To X: ${toY}`)
-    // console.log(lobby.board[toX][toY])
    switch(piece.name){
     case 'Pawn':
         if(piece.white){

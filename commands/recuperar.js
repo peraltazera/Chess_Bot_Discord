@@ -4,8 +4,8 @@ const FeedBack = require('../game/feedback.js')
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('recover')
-		.setDescription('Recuperar partida em andamento!'),
+		.setName('recuperar')
+		.setDescription('Recuperar partida em andamento'),
 	async execute(interaction) {
         let lobby = server.lobbyes.find(lobby => lobby.id == interaction.channelId+interaction.guildId)
         if(lobby)

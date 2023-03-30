@@ -8,20 +8,20 @@ const Teste = require('../index.js')
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('chess')
-		.setDescription('Criar partida multiplayer!')
+		.setName('multiplayer')
+		.setDescription('Criar partida multiplayer')
         .addUserOption(option =>
-            option.setName('white')
-                .setDescription('Jogador das brancas!')
+            option.setName('brancas')
+                .setDescription('Jogador das brancas')
                 .setRequired(true))
         .addUserOption(option =>
-            option.setName('black')
-                .setDescription('Jogador das pretas!')
+            option.setName('pretas')
+                .setDescription('Jogador das pretas')
                 .setRequired(true)),
 	async execute(interaction) {
         let lobby = server.lobbyes.find(lobby => lobby.id == interaction.channelId+interaction.guildId)
-        const white = interaction.options.getUser('white')
-        const black = interaction.options.getUser('black')
+        const white = interaction.options.getUser('brancas')
+        const black = interaction.options.getUser('pretas')
         if(lobby)
         {
             FeedBack.CreateFeedback(interaction, `Jogo ja foi criado!`, true, 5)

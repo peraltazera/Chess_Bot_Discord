@@ -21,16 +21,16 @@ let values = [{name: 'A', value: 0},{name: 'B', value: 1},{name: 'C', value: 2},
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('move')
-		.setDescription('Mover uma peça!')
+		.setName('mover')
+		.setDescription('Mover uma peça')
         .addStringOption(option =>
-            option.setName('from')
-                .setDescription('Onde a peça esta!')
+            option.setName('de')
+                .setDescription('Aonde está a peça')
                 .setRequired(true)
                 .setMaxLength(2))
         .addStringOption(option =>
-            option.setName('to')
-                .setDescription('Para onde a peça vai!')
+            option.setName('para')
+                .setDescription('Para onde a peça vai')
                 .setRequired(true)
                 .setMaxLength(2)),
 	async execute(interaction) {
@@ -41,8 +41,8 @@ module.exports = {
             {
                 if(interaction.user.id == lobby.player1.id && lobby.player1.turn || interaction.user.id == lobby.player2.id && lobby.player2.turn)
                 {
-                    const from = interaction.options.getString('from').toUpperCase()
-                    const to = interaction.options.getString('to').toUpperCase()
+                    const from = interaction.options.getString('de').toUpperCase()
+                    const to = interaction.options.getString('para').toUpperCase()
                     if(positions.find(pos => pos == from) && positions.find(pos => pos == to))
                     {
                         let fromX = values.find(obj => from[0] == obj.name).value
@@ -86,42 +86,42 @@ module.exports = {
                                     }
                                     else
                                     {
-                                        FeedBack.CreateFeedback(interaction, `Você não pode mover essa peça desse jeito!`, true, 5)
+                                        FeedBack.CreateFeedback(interaction, `Você não pode mover essa peça desse jeito`, true, 5) // Você não pode mover essa peça desse jeito
                                     }
                                 }
                                 else
                                 {
-                                    FeedBack.CreateFeedback(interaction, `Você não pode mover suas peças para uma casa que ja possua uma peça sua!`, true, 5)
+                                    FeedBack.CreateFeedback(interaction, `Você não pode mover suas peças para uma casa que ja possua uma peça sua`, true, 5)
                                 }
                             }
                             else
                             {
-                                FeedBack.CreateFeedback(interaction, `Você não pode mover as peças do oponente!`, true, 5)
+                                FeedBack.CreateFeedback(interaction, `Você não pode mover as peças do oponente`, true, 5)
                             }
                         }
                         else
                         {
-                            FeedBack.CreateFeedback(interaction, `A pocição informada não contem nenhuma peça!`, true, 5)
+                            FeedBack.CreateFeedback(interaction, `A pocição informada não contem nenhuma peça`, true, 5)
                         }
                     }
                     else
                     {
-                        FeedBack.CreateFeedback(interaction, `Movimento Invalido!`, true, 5)
+                        FeedBack.CreateFeedback(interaction, `Movimento Invalido`, true, 5)
                     }
                 }
                 else
                 {
-                    FeedBack.CreateFeedback(interaction, `Não é seu turno!`, true, 5)
+                    FeedBack.CreateFeedback(interaction, `Não é seu turno`, true, 5)
                 }
             }
             else
             {
-                FeedBack.CreateFeedback(interaction, `Você não esta participando do jogo!`, true, 5)
+                FeedBack.CreateFeedback(interaction, `Você não esta participando do jogo`, true, 5)
             }
         }
         else
         {
-            FeedBack.CreateFeedback(interaction, `Jogo não existe!`, true, 5)
+            FeedBack.CreateFeedback(interaction, `Jogo não existe`, true, 5)
         }
 	},
 }

@@ -6,27 +6,27 @@ const FeedBack = require('../game/feedback.js')
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('ai')
-		.setDescription('Criar partida contra IA!')
+		.setName('singleplayer')
+		.setDescription('Criar partida contra IA')
         .addUserOption(option =>
-            option.setName('user')
-                .setDescription('Jogador!')
+            option.setName('jogador')
+                .setDescription('Jogador')
                 .setRequired(true))
         .addStringOption(option =>
-            option.setName('difficulty')
-                .setDescription('Dificuldade!')
+            option.setName('dificuldade')
+                .setDescription('Dificuldade')
                 .setRequired(true)
                 .addChoices(
-					{ name: 'very easy', value: '0' },
-					{ name: 'easy', value: '1' },
-					{ name: 'medium', value: '2' },
-                    { name: 'hard', value: '3' },
-                    { name: 'very hard', value: '4' }
+					{ name: 'Muito Facil', value: '0' },
+					{ name: 'Facil', value: '1' },
+					{ name: 'Medio', value: '2' },
+                    { name: 'Dificil', value: '3' },
+                    { name: 'Muito Dificil', value: '4' }
 				)),
 	async execute(interaction) {
         let lobby = server.lobbyes.find(lobby => lobby.id == interaction.channelId+interaction.guildId)
         const user = interaction.options.getUser('user')
-        const difficulty = parseInt(interaction.options.getString('difficulty'))
+        const difficulty = parseInt(interaction.options.getString('dificuldade'))
         if(lobby)
         {
             FeedBack.CreateFeedback(interaction, `Jogo ja foi criado!`, true, 5)

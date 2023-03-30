@@ -1,38 +1,41 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
 
 const exampleEmbed = new EmbedBuilder()
-    .setImage('https://i.imgur.com/AfFp7pu.png')
-	.setColor(0x0099FF)
-	.setTitle('Commands')
+    // .setImage('https://cdn.discordapp.com/app-icons/1077947825595351190/b2be6b622c3e8701d8ff3524ac99961f.png')
+	.setColor(0x7B61FF)
+	.setTitle('Comandos')
 	//.setURL('https://discord.js.org/')
-	.setAuthor({ name: 'Bot Chess', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
-	.setDescription('Lista de todos os comandos!')
-	.setThumbnail('https://i.imgur.com/AfFp7pu.png')
+	.setAuthor({ name: 'Chess', iconURL: 'https://cdn.discordapp.com/app-icons/1077947825595351190/b2be6b622c3e8701d8ff3524ac99961f.png', url: 'https://discord.js.org' })
+	.setDescription('Lista todos os comandos')
+	// .setThumbnail('https://i.imgur.com/AfFp7pu.png')
 	.addFields(
         { name: '\n', value: '\n' },
         { name: '\n', value: '\n' },
-		{ name: '/chess', value: 'Criar partida multiplayer' },
+		{ name: '/multiplayer', value: 'Criar partida multiplayer' },
         { name: '\n', value: '\n' },
-		{ name: '/restart', value: 'Reiniciar a partida' },
+		{ name: '/singleplayer', value: 'Criar partida contra IA' },
         { name: '\n', value: '\n' },
-		{ name: '/delete', value: 'Finaliza a partida' },
+		{ name: '/mover', value: 'Mover uma peça' },
         { name: '\n', value: '\n' },
-        { name: '/ai', value: 'Criar partida contra IA' },
+		{ name: '/reiniciar', value: 'Reiniciar a partida' },
         { name: '\n', value: '\n' },
-        { name: '/move', value: 'Mover uma peça' },
+		{ name: '/recuperar', value: 'Recuperar partida em andamento' },
         { name: '\n', value: '\n' },
-        { name: '/recover', value: 'Recuperar partida em andamento' },
+		{ name: '/finalizar', value: 'Termine a partida' },
         { name: '\n', value: '\n' },
-        { name: '/commands', value: 'Lista todos os comandos' },
+		{ name: '\n', value: '\n' },
+        // { name: '/comandos', value: 'Lista todos os comandos' },
+		// { name: '\n', value: '\n' },
+		// { name: '\n', value: '\n' },
 	)
-    .setImage('https://i.imgur.com/AfFp7pu.png')
+    // .setImage('https://i.imgur.com/AfFp7pu.png')
 	.setTimestamp()
-	.setFooter({ text: 'Ultima Atualização', iconURL: 'https://i.imgur.com/AfFp7pu.png' })
+	.setFooter({ text: 'Ultima Atualização', iconURL: 'https://cdn.discordapp.com/app-icons/1077947825595351190/b2be6b622c3e8701d8ff3524ac99961f.png' })
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('commands')
-		.setDescription('Lista todos os comandos!'),
+		.setName('comandos')
+		.setDescription('Lista todos os comandos'),
 	async execute(interaction) {
 		await interaction.reply({ embeds: [exampleEmbed] })
 	},

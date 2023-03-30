@@ -5,8 +5,8 @@ const Board = require('../game/board.js')
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('restart')
-		.setDescription('Reiniciar a partida!'),
+		.setName('reiniciar')
+		.setDescription('Reiniciar a partida'),
 	async execute(interaction) {
         let lobby = server.lobbyes.find(lobby => lobby.id == interaction.channelId+interaction.guildId)
         if(lobby){
