@@ -17,7 +17,7 @@ module.exports = {
         }
         else
         {
-            await interaction.reply(`Erro!`)
+            FeedBack.CreateFeedback(interaction, `Partida não encontrada!`, true, 5)
         }
 	},
 }

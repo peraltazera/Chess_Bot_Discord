@@ -5,7 +5,7 @@ const FeedBack = require('../game/feedback.js')
 const Piece = require('../game/piece.js')
 const wait = require('node:timers/promises').setTimeout
 
-let positions = ['A8' ,'A7' ,'A6' ,'A5' ,'A4' ,'A3' ,'A2' ,'A1',
+const positions = ['A8' ,'A7' ,'A6' ,'A5' ,'A4' ,'A3' ,'A2' ,'A1',
                 'B8' ,'B7' ,'B6' ,'B5' ,'B4' ,'B3' ,'B2' ,'B1',
                 'C8' ,'C7' ,'C6' ,'C5' ,'C4' ,'C3' ,'C2' ,'C1',
                 'D8' ,'D7' ,'D6' ,'D5' ,'D4' ,'D3' ,'D2' ,'D1',
@@ -14,7 +14,7 @@ let positions = ['A8' ,'A7' ,'A6' ,'A5' ,'A4' ,'A3' ,'A2' ,'A1',
                 'G8' ,'G7' ,'G6' ,'G5' ,'G4' ,'G3' ,'G2' ,'G1',
                 'H8' ,'H7' ,'H6' ,'H5' ,'H4' ,'H3' ,'H2' ,'H1',]
 
-let values = [{name: 'A', value: 0},{name: 'B', value: 1},{name: 'C', value: 2},{name: 'D', value: 3},
+const values = [{name: 'A', value: 0},{name: 'B', value: 1},{name: 'C', value: 2},{name: 'D', value: 3},
                 {name: 'E', value: 4},{name: 'F', value: 5},{name: 'G', value: 6},{name: 'H', value: 7},
                 {name: '1', value: 7},{name: '2', value: 6},{name: '3', value: 5},{name: '4', value: 4},
                 {name: '5', value: 3},{name: '6', value: 2},{name: '7', value: 1},{name: '8', value: 0},]

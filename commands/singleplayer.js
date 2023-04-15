@@ -6,7 +6,7 @@ const FeedBack = require('../game/feedback.js')
 const Piece = require('../game/piece.js')
 const wait = require('node:timers/promises').setTimeout
 
-let values = [{name: 'A', value: 0},{name: 'B', value: 1},{name: 'C', value: 2},{name: 'D', value: 3},
+const values = [{name: 'A', value: 0},{name: 'B', value: 1},{name: 'C', value: 2},{name: 'D', value: 3},
                 {name: 'E', value: 4},{name: 'F', value: 5},{name: 'G', value: 6},{name: 'H', value: 7},
                 {name: '1', value: 7},{name: '2', value: 6},{name: '3', value: 5},{name: '4', value: 4},
                 {name: '5', value: 3},{name: '6', value: 2},{name: '7', value: 1},{name: '8', value: 0},]
@@ -65,7 +65,7 @@ module.exports = {
             await interaction.reply({ files: [lobby.attachment] })
             const message = await interaction.fetchReply()
             lobby.messageId = message.id
-            if(pieces == 2)
+            if(lobby.player1.pieces == 2)
             {
                 await interaction.followUp({ content: 'Aguarde a bot fazer sua jogada!', ephemeral: true });
                 lobby.game.aiMove(lobby.difficulty) 
