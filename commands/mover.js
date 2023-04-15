@@ -49,44 +49,91 @@ module.exports = {
                         let fromY = values.find(obj => from[1] == obj.name).value
                         let toX = values.find(obj => to[0] == obj.name).value
                         let toY = values.find(obj => to[1] == obj.name).value
-                        
                         if(lobby.board[fromX][fromY].name)
                         {
-                            if((lobby.board[fromX][fromY].white && lobby.player1.turn) || (!lobby.board[fromX][fromY].white == true && lobby.player2.turn))
+                            if((lobby.board[fromX][fromY].white && lobby.player1.turn && lobby.player1.pieces == 1 ) || 
+                            (!lobby.board[fromX][fromY].white && lobby.player2.turn && lobby.player2.pieces == 2) ||
+                            (!lobby.board[fromX][fromY].white && lobby.player1.turn && lobby.player1.pieces == 2 ) || 
+                            (lobby.board[fromX][fromY].white && lobby.player2.turn && lobby.player2.pieces == 1))
                             {
-                                if(!lobby.board[toX][toY].name || lobby.board[toX][toY].name && lobby.board[toX][toY].white && lobby.player2.turn ||
-                                    lobby.board[toX][toY].name && !lobby.board[toX][toY].white && lobby.player1.turn )
+                                if(!lobby.board[toX][toY].name || lobby.board[toX][toY].name && lobby.board[toX][toY].white && lobby.player2.turn && lobby.player2.pieces == 2 ||
+                                    lobby.board[toX][toY].name && !lobby.board[toX][toY].white && lobby.player1.turn && lobby.player1.pieces == 1 ||
+                                    lobby.board[toX][toY].name && !lobby.board[toX][toY].white && lobby.player2.turn && lobby.player2.pieces == 1 ||
+                                    lobby.board[toX][toY].name && lobby.board[toX][toY].white && lobby.player1.turn && lobby.player1.pieces == 2 )
                                 {
-                                    if(Piece.CheckMovement(lobby.board[fromX][fromY], toX, toY, lobby))
+                                    if(Piece.CheckMovement(lobby.board[fromX][fromY], toX, toY, lobby) && lobby.game.moves(from).find(gameTo => to == gameTo))
                                     {
                                         let attachment = await Board.CreateBoard(from, fromX, fromY, to, toX, toY, lobby)
                                         lobby.attachment = attachment
                                         await interaction.reply({ files: [lobby.attachment] })
+                                        const message = await interaction.fetchReply()
+                                        lobby.messageId = message.id
+                                        console.log(lobby.game.moves(from))
+                                        console.log(lobby.game.moves(from).find(gameTo => to == gameTo))
+                                        lobby.game.move(from, to)
                                         if(lobby.myInteraction){
                                             lobby.myInteraction.deleteReply()
                                         }
-                                        if(lobby.game){
-                                            lobby.game.move(from, to)
+                                        if(lobby.ai){
+                                            await interaction.followUp({ content: 'Aguarde a bot fazer sua jogada!', ephemeral: true });
                                             lobby.game.aiMove(lobby.difficulty) 
-                                            const fromAi = lobby.game.getHistory()[lobby.game.getHistory().length - 1].from
-                                            const toAi = lobby.game.getHistory()[lobby.game.getHistory().length - 1].to
+                                            const fromAi = lobby.game.getHistory()[lobby.game.getHistory().length == 0 ? 0 : lobby.game.getHistory().length - 1].from
+                                            const toAi = lobby.game.getHistory()[lobby.game.getHistory().length == 0 ? 0 : lobby.game.getHistory().length - 1].to
                                             fromX = values.find(obj => fromAi[0] == obj.name).value
                                             fromY = values.find(obj => fromAi[1] == obj.name).value
                                             toX = values.find(obj => toAi[0] == obj.name).value
                                             toY = values.find(obj => toAi[1] == obj.name).value
                                             if(Piece.CheckMovement(lobby.board[fromX][fromY], toX, toY, lobby))
                                             {
-                                                await wait(3*1000)
+                                                await wait(1000)
                                                 attachment = await Board.CreateBoard(from, fromX, fromY, to, toX, toY, lobby)
                                                 lobby.attachment = attachment
                                                 await interaction.editReply({ files: [lobby.attachment] })
+                                                await interaction.followUp({ content: 'Sua vez de jogar!', ephemeral: true });
+                                            }
+                                        }
+                                        if(lobby.game.exportJson().isFinished) 
+                                        {
+                                            server.lobbyes.splice(server.lobbyes.indexOf(lobby), 1)
+                                            await interaction.followUp('Jogo Finalizado!');
+                                            if(lobby.game.exportJson().checkMate) 
+                                            {
+                                                if(lobby.game.exportJson().turn == "black")
+                                                {
+                                                    await interaction.followUp('As brancas ganharam!');
+                                                }
+                                                else
+                                                {
+                                                    await interaction.followUp('As pretas ganharam!');
+                                                }
+                                            } 
+                                            else 
+                                            {
+                                                await interaction.followUp('Empate!');
+                                            }
+                                        }
+                                        else if(lobby.game.exportJson().check)
+                                        {
+                                            if(lobby.game.exportJson().turn == "black")
+                                            {
+                                                await interaction.followUp('As pretas estão em check!');
+                                            }
+                                            else
+                                            {
+                                                await interaction.followUp('As brancas estão em check!');
                                             }
                                         }
                                         lobby.myInteraction = interaction
+                                        console.log(lobby.game.printToConsole())
+                                        // console.log(lobby.game.exportJson())
+                                        console.log(lobby.game.exportJson().turn)
+                                        console.log(lobby.game.exportJson().isFinished)
+                                        console.log(lobby.game.exportJson().checkMate)
+                                        console.log(lobby.game.exportJson().check)
                                     }
                                     else
                                     {
-                                        FeedBack.CreateFeedback(interaction, `Você não pode mover essa peça desse jeito`, true, 5) // Você não pode mover essa peça desse jeito
+                                        FeedBack.CreateFeedback(interaction, `Você não pode fazer este movimento`, true, 5) // Você não pode mover essa peça desse jeito
                                     }
                                 }
                                 else

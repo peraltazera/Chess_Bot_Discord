@@ -59,6 +59,7 @@ async function CreateBoard(from, fromX, fromY, to, toX, toY, lobby)
     const posFillY = y => 12 + (y * difY)
 
     const canvas = Canvas.createCanvas(620, 620)
+    // const canvas = Canvas.createCanvas(780, 780)
     const ctx = canvas.getContext('2d')
 
     await Canvas.loadImage('./Board/Board.png').then((image) => {

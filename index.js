@@ -36,8 +36,17 @@ client.on(Events.MessageCreate, async message => {
 })
 
 client.on(Events.MessageDelete, (interaction) => {
-	//console.log(`A interação ${interaction.id} foi deletada.`);
-	const lobby = server.lobbyes.find(lobby => lobby.id == interaction.channelId+interaction.guildId)
+	// console.log(server.lobbyes)
+	server.lobbyes.find((obj, id) => {
+		if(interaction.id == obj.messageId)
+		{
+			server.lobbyes[id].myInteraction = null
+			server.lobbyes[id].messageId = null
+			console.log(`A interação ${interaction.id} foi deletada.`);
+		}
+	})
+	// console.log(server.lobbyes)
+	//const lobby = server.lobbyes.find(lobby => lobby.id == interaction.channelId+interaction.guildId)
 	//if(lobby){
 		//lobby.myInteraction = '';
 		//console.log(`A interação da partida foi deletada`);

@@ -21,7 +21,7 @@ function Board (row, col){
 }
 
 module.exports = {
-    lobby: function lobby(id, channelId, guildId, player1, player2, myInteraction, difficulty, game, attachment) {
+    lobby: function lobby(id, channelId, guildId, player1, player2, myInteraction, difficulty, game, attachment, ai, messageId) {
         this.id = id;
         this.channelId = channelId;
         this.guildId = guildId;
@@ -37,6 +37,8 @@ module.exports = {
         this.board = Board(8,8) 
         this.start = false 
         this.attachment = attachment 
+        this.ai = ai 
+        this.messageId = messageId 
     },     
     lobbyes: [],
     count: 0,

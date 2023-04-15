@@ -15,6 +15,8 @@ module.exports = {
             }
             await interaction.reply({ files: [lobby.attachment] })
             lobby.myInteraction = interaction
+            const message = await interaction.fetchReply()
+            lobby.messageId = message.id
         }
         else
         {

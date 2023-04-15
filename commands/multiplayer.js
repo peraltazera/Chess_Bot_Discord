@@ -28,18 +28,22 @@ module.exports = {
         }
         else if(!white.bot && !black.bot)
         {
+            const game = new jsChessEngine.Game()
             server.lobbyes.push(new server.lobby(interaction.channelId+interaction.guildId,
                 interaction.channelId, interaction.guildId, 
-                { id: white.id, username: white.username, turn: true }, 
-                { id: black.id, username: black.username, turn: false}, 
+                { id: white.id, username: white.username, turn: true, pieces: 1 }, 
+                { id: black.id, username: black.username, turn: false, pieces: 2}, 
                 interaction, 
                 '',
+                game,
                 '',
-                ''))
+                false))
             lobby = server.lobbyes.find(lobby => lobby.id == interaction.channelId+interaction.guildId)
             const attachment = await Board.CreateBoard(null, null, null, null, null, null, lobby)
             lobby.attachment = attachment
             await interaction.reply({ files: [lobby.attachment] })
+            const message = await interaction.fetchReply()
+            lobby.messageId = message.id
         }
         else
         {
